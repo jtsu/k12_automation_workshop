@@ -26,21 +26,15 @@ def post_message(token, room_id, message):
 
 
 
-    response = requests.post("https://webexapis.com/v1/messages/", headers=header, data=json.dumps(data), verify=True)
+    response = requests.post("https://webexapis.com/v1/messages/", headers=header, json=data, verify=True)
 
     if response.status_code == 200:
-        print(f"Message was successfully posted to Webex Teams")
+        print(f"Message was successfully posted to your Webex Room")
 
     else:
         print("failed with statusCode: %d" % response.status_code)
-        if response.status_code == 404:
-            print("please check the bot is in the room you're attempting to post to...")
-        elif response.status_code == 400:
-            print(
-                "please check the identifier of the room you're attempting to post to..."
-            )
-        elif response.status_code == 401:
-            print("please check if the access token is correct...")
+        print("Check response codes at the following url:")
+        print("https://developer.webex.com/docs/api/v1/user-call-settings/read-call-recording-settings-for-a-personAs")
 
 
 
