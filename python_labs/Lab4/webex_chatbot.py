@@ -32,7 +32,7 @@ def post_message(token, room_id, message):
         print(f"Message was successfully posted to your Webex Room")
 
     else:
-        print("failed with statusCode: %d" % response.status_code)
+        print("Failed with response code: %d" % response.status_code)
         print("Check response codes at the following url:")
         print("https://developer.webex.com/docs/api/v1/user-call-settings/read-call-recording-settings-for-a-personAs")
 
