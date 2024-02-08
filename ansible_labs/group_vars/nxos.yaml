@@ -1,0 +1,15 @@
+---
+ansible_connection: network_cli
+ansible_network_os: nxos
+ansible_become: yes
+ansible_become_method: enable
+ansible_user: admin
+ansible_password: Admin_1234!
+ansible_become_password: Admin_1234!
+
+ntp_servers:
+  - 192.168.1.1
+  - 192.168.1.2
+snmp_server:
+  - 192.168.2.1
+  - 192.168.2.2

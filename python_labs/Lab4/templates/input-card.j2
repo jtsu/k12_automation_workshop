@@ -1,0 +1,40 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.3",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "Nexus 7000 HA Issue",
+            "size": "ExtraLarge",
+            "horizontalAlignment": "center",
+            "fontType": "Default",
+            "isSubtle": true,
+            "color": "Accent",
+            "weight": "Bolder",
+            "wrap": true,
+            "style": "Emphasis"
+        },
+        {
+            "type": "TextBlock",
+            "text": "Supervisor Redundancy State",
+            "size": "Large",
+            "separator": true,
+            "horizontalAlignment": "center",
+            "fontType": "Default",
+            "isSubtle": true,
+            "color": "Good",
+            "weight": "Bolder",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": {{ message }},
+            "size": "Medium",
+            "horizontalAlignment": "center",
+            "fontType": "Default",
+            "isSubtle": true,
+            "wrap": true
+        }
+    ]
+}

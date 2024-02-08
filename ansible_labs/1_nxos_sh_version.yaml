@@ -1,0 +1,17 @@
+---
+
+- name: Cisco NXOS show version
+  hosts: nxos
+  gather_facts: false
+
+  tasks:
+    - name: run show version command
+      nxos_command:
+        commands: 
+        - show version | json
+        - show module | json
+      register: output
+
+    - name: print output
+      debug:
+        var: output.stdout_lines

@@ -1,0 +1,70 @@
+---
+
+- name: Cisco NXOS show vlans
+  hosts: nxos
+  gather_facts: false
+
+  tasks:
+    - name: Delete vlans.
+      nxos_vlans:
+        config:
+          - vlan_id: 88
+          - vlan_id: 89
+        state: deleted
+
+
+    - name: Merge provided configuration with device configuration.
+      nxos_vlans:
+        config:
+          - vlan_id: 88
+            name: test-vlan88
+            enabled: True
+          - vlan_id: 89
+            name: test-vlan89
+            enabled: False
+        state: replaced
+
+
+    - name: Configure flow record
+      nxos_config:
+        lines:
+          - interface vlan 88
+          - ip address 10.88.88.88/24
+          - description Configured by Ansible
+          - shutdown 
+
+
+
+    - name: Merge provided configuration with device configuration
+      cisco.nxos.nxos_interfaces:
+        config:
+        - name: "vlan {{ vlan_id }}"
+          description: Configured by Ansible nxos_interfaces
+          enabled: false
+        state: merged
+
+    - name: Replace device configuration of specified L3 interfaces with provided configuration.
+      cisco.nxos.nxos_l3_interfaces:
+        config:
+        - name: "vlan {{ vlan_id }}"
+          ipv4:
+            - address: "{{ vlan_ip }}"
+        state: merged
+
+
+
+    - name: run show vlan command
+      nxos_command:
+        commands: 
+        - show vlan | include enet
+        - show ip int br | begin 88
+        - show run interface vlan 88
+        - show run interface vlan 89
+        
+      register: output
+
+
+    - name: print output
+      debug:
+        var: output.stdout_lines
+

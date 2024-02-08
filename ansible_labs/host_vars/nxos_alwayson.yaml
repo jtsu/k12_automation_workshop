@@ -1,0 +1,10 @@
+ansible_connection: network_cli
+ansible_network_os: nxos
+ansible_become: yes
+ansible_become_method: enable
+ansible_user: admin
+ansible_password: Admin_1234!
+ansible_become_password: Admin_1234!
+
+vlan_id: 89
+vlan_ip: 10.100.100.89/24

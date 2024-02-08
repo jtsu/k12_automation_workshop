@@ -1,0 +1,32 @@
+---
+
+- name: Cisco NXOS show system redundancy for Supervisor Modules
+  hosts: nxos
+  gather_facts: false
+  vars_files:
+    - "../.vault.yaml"
+
+  tasks:
+    - name: show system redundancy status
+      ignore_errors: true
+      nxos_command:
+        commands: 
+        - command: show system redundancy status
+          output: json
+        wait_for:
+        - result[0].rdn_mode_oper != "HA"
+        - result[0].other_sup_rdn_state != "Standby"
+      register: output
+
+    - name: print output
+      debug:
+        var: output.stdout_lines
+
+
+    - name: Cisco Webex Teams - Markdown Message to a Room
+      community.general.cisco_webex:
+        recipient_type: roomId
+        recipient_id: "{{ ROOM_ID}}"
+        msg_type: markdown
+        personal_token: "{{ TOKEN }}"
+        msg: "**Supervisor HA in unknown state:**\n```{{ output.stdout_lines }} ```"

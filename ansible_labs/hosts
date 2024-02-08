@@ -1,0 +1,6 @@
+[routers]
+iosxe_alwayson ansible_host=sandbox-iosxe-latest-1.cisco.com
+cat8000v_sandbox ansible_host=10.10.20.48
+
+[nxos]
+nxos_alwayson ansible_host=sandbox-nxos-1.cisco.com

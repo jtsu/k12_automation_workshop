@@ -1,0 +1,31 @@
+---
+# Ansible Playbook to config loopback interface
+
+- name: config interface ip
+  hosts: routers
+  connection: network_cli
+
+  tasks:
+    - name: Configure loopback interface
+      ios_config:
+        lines:
+          - Interface Loopback88
+          - description Ansible Test Interface
+          - ip address 10.100.100.200 255.255.255.255
+          - no shutdown
+
+    - name: Merge provided configuration with device configuration
+      cisco.ios.ios_interfaces:
+        config:
+          - name: Loopback89
+            description: Configured and Merged by Ansible Network
+            enabled: false
+        state: merged
+
+    - name: Merge provided configuration with device configuration
+      cisco.ios.ios_l3_interfaces:
+        config:
+          - name: Loopback89
+            ipv4:
+              - address: 192.168.0.2/24
+        state: merged
