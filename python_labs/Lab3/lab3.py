@@ -20,9 +20,7 @@ def post_message(token, room_id, message):
         }
 
     response = requests.post(url=url, headers=header, json=data, verify=True)
-    print(type(data))
-
-    print(f'Status Code: {response.status_code}')
+    print(f'Message sent to Webex (Status Code: {response.status_code}).')
 
 
 def get_sup_status():
