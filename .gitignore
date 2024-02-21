@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 
 vault.yaml
+python_labs/.DS_Store
